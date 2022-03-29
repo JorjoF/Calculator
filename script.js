@@ -5,6 +5,8 @@ let operator = '';
 const currentDisplayNumber = document.querySelector('.currentNumber');
 const previousDisplayNumber = document.querySelector('.previousNumber');
 
+window.addEventListener('keydown', handleKeyPress);
+
 const operatorButton = document.querySelectorAll('[data-operator]');
 const numberButtons = document.querySelectorAll('[data-number]');
 
@@ -129,5 +131,41 @@ function addDecimal(){
     }
 }
 
+function handleKeyPress(e){
+    e.preventDefault();
+    if(e.key >= 0 && e.key <= 9){
+        appendNumber(e.key);
+    }
+    if(e.key === "Enter" || (e.key === "=" && firstOperand != "" && secondOperand !="")){
+        compute();
+    }
+    if(e.key ==="+" || e.key === "-" || e.key === "/"){
+        handleOperator(e.key);
+    }
+    if(e.key === "*"){
+        handleOperator("x");
+    }
+    if(e.key === "."){
+        addDecimal();
+    }
+    if(e.key === "Backspace"){
+        handleDelete();
+    }
+    if(e.key === "Escape"){
+        clear();
+    }
+}
 
-
+function handleDelete(){
+    if( firstOperand != ""){
+        firstOperand = firstOperand.slice(0,-1);
+        currentDisplayNumber.textContent = firstOperand;
+        if(firstOperand === ""){
+            currentDisplayNumber.textContent = "";
+        }
+    }
+    if(firstOperand === "" && secondOperand !== "" && operator === ""){
+        secondOperand = secondOperand.slice(0, -1);
+        currentDisplayNumber.textContent = secondOperand;
+    }
+}
