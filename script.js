@@ -1,66 +1,132 @@
 let firstOperand = '';
 let secondOperand = '';
-let currentOperation = '';
+let operator = '';
 
 const currentDisplayNumber = document.querySelector('.currentNumber');
 const previousDisplayNumber = document.querySelector('.previousNumber');
 
 const operatorButton = document.querySelectorAll('[data-operator]');
 const numberButtons = document.querySelectorAll('[data-number]');
-const cButton = document.querySelector('.clear');
-const nButton = document.querySelector('.sign');
-const screen = document.querySelector('.screen');
+
 const point = document.querySelector('.point');
+point.addEventListener('click', addDecimal)
+
+const nButton = document.querySelector('.sign');
+nButton.addEventListener('click', () => {
+    firstOperand = Number(firstOperand);
+    firstOperand -= (firstOperand * 2);
+    firstOperand = firstOperand.toString();
+    currentDisplayNumber.textContent = firstOperand;
+});
+
 const equal = document.querySelector('.equal');
+equal.addEventListener('click', () => {
+    if(firstOperand != "" && secondOperand != ""){
+        compute();
+    }
+});
 
-numberButtons.forEach((button) => 
-    button.addEventListener('click', () => {
-        appendNumber(button.textContent);
-    })
-);
-
-operatorButton.forEach((button) => 
-    button.addEventListener('click', () =>{
-
-    })
-);
-
+const cButton = document.querySelector('.clear');
 cButton.addEventListener('click', clear);
 
+numberButtons.forEach((button) => 
+    button.addEventListener('click', (e) => {
+        appendNumber(e.target.textContent);
+    })
+);
+
 function appendNumber(number){
-    screen.value += number
-}
-
-function add(a, b){
-    return a + b;
-}
-
-function subtract(a, b){
-    return a - b;
-}
-
-function multiply(a, b){
-    return a * b;
-}
-
-function divide(a, b){
-    if(b == 0){
-        return "err divide by zero";
-    }else{
-        return a / b;
+    if(secondOperand !== "" && firstOperand !== "" && operator === ""){
+        secondOperand = "";
+        currentDisplayNumber.textContent = firstOperand;
+    }
+    if (firstOperand.length <= 11) {
+        firstOperand += number;
+        currentDisplayNumber.textContent = firstOperand;
     }
 }
 
-function percentage(a, b){
- return b * (a/100);
+operatorButton.forEach((button) => 
+    button.addEventListener('click', (e) =>{
+        handleOperator(e.target.textContent);
+    })
+);
+
+function handleOperator(op){
+    if(secondOperand === ""){
+        secondOperand = firstOperand;
+        operatorCheck(op)
+    }else if  (firstOperand === ""){
+        operatorCheck(op);
+    }else{
+        compute();
+        operator = op;
+        currentDisplayNumber.textContent = "0";
+        previousDisplayNumber.textContent = secondOperand + " " + operator;
+    }
+}
+
+function operatorCheck(text){
+    operator = text;
+    previousDisplayNumber.textContent = secondOperand + " " + operator;
+    currentDisplayNumber.textContent = "0";
+    firstOperand = "";
+}
+
+function compute(){
+    secondOperand = Number(secondOperand);
+    firstOperand = Number(firstOperand);
+
+    if (operator === "+"){
+        secondOperand += firstOperand;
+    }else if(operator === "-"){
+        secondOperand -= firstOperand;
+    }else if(operator === "x"){
+        secondOperand *= firstOperand;
+    }else if(operator === "/") {
+        if(firstOperand <= 0){
+            secondOperand = "err";
+            displayResults();
+            return;
+        }
+        secondOperand /= firstOperand;
+    }else if(operator === "%"){
+        secondOperand *= (firstOperand/100);
+    }
+
+    secondOperand = roundNumber(secondOperand);
+    secondOperand = secondOperand.toString();
+    displayResults();
+}
+
+function roundNumber(num){
+    return Math.round(num * 100000) / 100000;
+}
+
+function displayResults(){
+    if(secondOperand.length <= 11){
+        currentDisplayNumber.textContent = secondOperand;
+    }else{
+        currentDisplayNumber.textContent = secondOperand.slice(0,11) + "..."
+    }
+    previousDisplayNumber.textContent ="";
+    operator = '';
+    firstOperand = '';
 }
 
 function clear(){
-    screen.value = 0;
+    firstOperand = "";
+    secondOperand = "";
+    operator = ""
+    currentDisplayNumber.textContent = "0";
+    previousDisplayNumber.textContent = "";
 }
 
-function sign(a){
-    return a - (a*2);
+function addDecimal(){
+    if(!firstOperand.includes(".")){
+        firstOperand += ".";
+        currentDisplayNumber.textContent = firstOperand;
+    }
 }
 
 
