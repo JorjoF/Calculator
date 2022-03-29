@@ -11,7 +11,10 @@
 <body>
     
     <div id="Calculator">
-            <input type="text" name="screen" class="screen" id="Screen" disabled value="3 + 2">
+        <div class="output">
+            <div class="previousNumber"></div>
+            <div class="currentNumber">0</div>
+          </div>
         <div class="buttons "id="Buttons">
             <button class="clear" >AC</button>
             <button class="sign" >+/-</button>
@@ -30,7 +33,7 @@
             <button class="three" data-number>3</button>
             <button class="plus" data-operator>+</button>
             <button class="zero" data-number>0</button>
-            <button class="decimal" >.</button>
+            <button class="point" >.</button>
             <button class="equal" >=</button>
         </div>
     </div>
