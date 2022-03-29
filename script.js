@@ -107,13 +107,14 @@ function roundNumber(num){
 
 function displayResults(){
     if(secondOperand.length <= 11){
+        
         currentDisplayNumber.textContent = secondOperand;
     }else{
         currentDisplayNumber.textContent = secondOperand.slice(0,11) + "..."
     }
     previousDisplayNumber.textContent ="";
     operator = '';
-    firstOperand = '';
+    firstOperand = secondOperand;
 }
 
 function clear(){
