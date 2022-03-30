@@ -1,3 +1,7 @@
+/*
+    Code used to dynamicaly add tailwind styling to Components like the screen or buttons
+*/
+
 const bodyClass="bg-green-600 bg-gradient-to-br from-zinc-800 bg-opacity-25";
 const bdy = document.querySelector('body');
 bodyClass.split(' ').forEach((cls) => bdy.classList.add(cls));
