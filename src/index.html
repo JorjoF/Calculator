@@ -4,10 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/dist/output.css">
     <title>Calculator</title>
 </head>
 <body>
+    <div id="Calculator">
+        <div id="output">
+            <div id="previousNumber"></div>
+            <div id="currentNumber">0</div>
+        </div>
+        <div id="buttons" class="grid grid-cols-4">
+            <button class="" id="clear" >AC</button>
+            <button class="" id="sign" >+/-</button>
+            <button class="" id="percentage" data-operator>%</button>
+            <button class="" id="divide" data-operator>/</button>
+            <button class="" id="seven" data-number>7</button>
+            <button class="" id="eight" data-number>8</button>
+            <button class="" id="nine" data-number>9</button>
+            <button class="" id="multiply" data-operator>x</button>
+            <button class="" id="four" data-number>4</button>
+            <button class="" id="five" data-number>5</button>
+            <button class="" id="six" data-number>6</button>
+            <button class="" id="minus" data-operator>-</button>
+            <button class="" id="one" data-number>1</button>
+            <button class="" id="two" data-number>2</button>
+            <button class="" id="three" data-number>3</button>
+            <button class="" id="plus" data-operator>+</button>
+            <button class="col-span-2" id="zero" data-number>0</button>
+            <button class="" id="point" >.</button>
+            <button class="" id="equal" >=</button>
+        </div>
+    </div>
     <script src="main.js"></script>
+    <script src="addStyles.js"></script>
 </body>
 </html>
