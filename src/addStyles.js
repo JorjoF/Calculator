@@ -31,9 +31,9 @@ function addClasses(btn){
     const btnDecClass = "hover:bg-yellow-500 border-yellow-500";
     if(btn.classList.value === 'number'){
         btnNumberClass.split(' ').forEach((cls) => btn.classList.add(cls));
-    } else if(btn.classList.value === 'operator' || btn.classList.value === "sign"){
+    } else if(btn.classList.value === 'operator'){
         btnOpClass.split(' ').forEach((cls) => btn.classList.add(cls));
-    } else if(btn.classList.value ==="clear"){
+    } else if(btn.classList.value ==="clear" || btn.classList.value === "sign"){
         btnClearClass.split(' ').forEach((cls) => btn.classList.add(cls));
     } else if(btn.classList.value ==="equal"){
         btnEqClass.split(' ').forEach((cls) => btn.classList.add(cls));
